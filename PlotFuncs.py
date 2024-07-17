@@ -1107,6 +1107,7 @@ class AxionPhoton():
             if block:
                 mask = dat[:,0]<0.85e-6
                 dat[mask,0] = nan
+            plt.fill_between(dat[:,0],dat[:,1]/(rs1*2e-10*dat[:,0]+rs2),y2=y2,edgecolor=None,facecolor=col,zorder=1.53,lw=0.01,alpha=0.5)
             plt.plot(dat[:,0],dat[:,1]/(rs1*2e-10*dat[:,0]+rs2),linestyle=lsty_proj,lw=lw_proj,zorder=1.5,color=col_proj,alpha=0.5)
             if RescaleByMass:
                 plt.text(9e-4*text_shift_x,2.5e3*text_shift_y,r'{\bf ALPS-II}',fontsize=20,color='k',rotation=20,alpha=0.5,clip_on=True)
@@ -1175,7 +1176,7 @@ class AxionPhoton():
 
         if projection:
             # IAXO arXiv[1212.4633]
-            IAXO_col = 'purple'
+            IAXO_col = [0.0, 0.8, 1]
             IAXO = loadtxt("limit_data/AxionPhoton/Projections/IAXO.txt")
             plt.plot(IAXO[:,0],IAXO[:,1]/(rs1*2e-10*IAXO[:,0]+rs2),'--',linewidth=2.5,color=IAXO_col,zorder=-1)
             plt.fill_between(IAXO[:,0],IAXO[:,1]/(rs1*2e-10*IAXO[:,0]+rs2),y2=y2,edgecolor=None,facecolor=IAXO_col,zorder=-1,alpha=0.3)
@@ -1463,27 +1464,27 @@ class AxionPhoton():
 
         return
 
-    def GlobularClusters(ax,text_label=r'{\bf Globular clusters}',text_pos=[1e0,1.1e-10],col=[0.0, 0.66, 0.42],text_col='w',fs=25,zorder=0.05,text_on=True,lw=1.5,edgealpha=1):
+    def GlobularClusters(ax,text_label=r'{\bf HB}',text_pos=[1e0,1.1e-10],col=[0.0, 0.66, 0.42],text_col='w',fs=25,zorder=0.05,text_on=True,lw=1.5,edgealpha=1):
         # Globular clusters arXiv:[1406.6053]
         dat = loadtxt("limit_data/AxionPhoton/GlobularClusters.txt")
-        FilledLimit(ax,dat,text_label,text_pos=text_pos,col=col,text_col=text_col,fs=fs,zorder=zorder,text_on=text_on,lw=lw,va='center',edgealpha=edgealpha,path_effects=line_background(1.5,'k'))
+        FilledLimit(ax,dat,text_label,text_pos=text_pos,col=col,text_col=text_col,fs=fs,zorder=zorder,text_on=text_on,lw=lw,va='center',edgealpha=edgealpha,path_effects=line_background(1.5,'k'),facealpha=0.4)
         return
 
     def GlobularClusters_R2(ax,text_label=r'{\bf Globular clusters ($R_2$)}',text_pos=[1e-3,5e-11],col=[0.0, 0.66, 0.42],text_col='w',fs=23,zorder=0.01,text_on=True,lw=1.5,edgealpha=1):
         # R2 parameter https://arxiv.org/pdf/2207.03102.pdf
         dat = loadtxt("limit_data/AxionPhoton/GlobularClusters-R2.txt")
-        FilledLimit(ax,dat,text_label,text_pos=text_pos,col=col,text_col=text_col,fs=fs,zorder=zorder,text_on=text_on,lw=lw,va='center',edgealpha=edgealpha,path_effects=line_background(1.5,'k'))
+        FilledLimit(ax,dat,text_label,text_pos=text_pos,col=col,text_col=text_col,fs=fs,zorder=zorder,text_on=text_on,lw=lw,va='center',edgealpha=edgealpha,path_effects=line_background(1.5,'k'),facealpha=0.4)
         return
 
-    def WhiteDwarfs(ax,text_label=r'\noindent {\bf White}\newline  {\bf dwarfs}',text_pos=[1.1e6,4e-8],col='#2ec763',text_col='w',fs=18,zorder=0.04,text_on=True,lw=1.5,rotation=87,edgealpha=1):
+    def WhiteDwarfs(ax,text_label=r'\noindent {\bf White}\newline  {\bf dwarfs}',text_pos=[1.1e6,4e-8],col=[0.0, 0.66, 0.42],text_col='w',fs=18,zorder=0.04,text_on=True,lw=1.5,rotation=87,edgealpha=1):
         dat = loadtxt("limit_data/AxionPhoton/WhiteDwarfs.txt")
-        FilledLimit(ax,dat,text_label,text_pos=text_pos,col=col,text_col=text_col,fs=fs,zorder=zorder,text_on=text_on,lw=lw,va='center',rotation=rotation,edgealpha=edgealpha,path_effects=line_background(1.5,'k'))
+        FilledLimit(ax,dat,text_label,text_pos=text_pos,col=col,text_col=text_col,fs=fs,zorder=zorder,text_on=text_on,lw=lw,va='center',rotation=rotation,edgealpha=edgealpha,path_effects=line_background(1.5,'k'),facealpha=0.4)
         return
 
-    def SolarNu(ax,text_label=r'{\bf Solar} $\nu$',text_pos=[1e1,2e-9],col='seagreen',text_col='w',fs=33,zorder=1,text_on=True,lw=1.5,edgealpha=1):
+    def SolarNu(ax,text_label=r'{\bf Solar} $\nu$',text_pos=[1e1,2e-9],col=[0.0, 0.66, 0.42],text_col='w',fs=33,zorder=1,text_on=True,lw=1.5,edgealpha=1):
         # Solar neutrino B8 bound arXiv:[1501.01639]
         dat = loadtxt("limit_data/AxionPhoton/SolarNu.txt")
-        FilledLimit(ax,dat,text_label,text_pos=text_pos,col=col,text_col=text_col,fs=fs,zorder=zorder,text_on=text_on,lw=lw,va='center',edgealpha=edgealpha,path_effects=line_background(1.5,'k'))
+        FilledLimit(ax,dat,text_label,text_pos=text_pos,col=col,text_col=text_col,fs=fs,zorder=zorder,text_on=text_on,lw=lw,va='center',edgealpha=edgealpha,path_effects=line_background(1.5,'k'),facealpha=0.4)
         return
 
     def DiffuseGammaRays(ax,text_label=r'{\bf Diffuse}-$\gamma$',text_pos=[1.5e5,2.5e-10],col='#318c49',text_col='w',fs=18,zorder=0.0299,text_on=True,lw=1.5,rotation=0):
@@ -1714,23 +1715,23 @@ class AxionPhoton():
 
 
         if projection:
-            AxionPhoton.ADMX(ax,fs=fs,text_on=False)
-            AxionPhoton.HAYSTAC(ax,text_on=False)
-            AxionPhoton.ABRACADABRA(ax,fs=fs,text_on=text_on)
-            AxionPhoton.SHAFT(ax,text_on=text_on)
-            AxionPhoton.ADBC1(ax,text_on=text_on)
-            AxionPhoton.ORGAN(ax,text_on=False,lw=0)
-            AxionPhoton.UPLOAD(ax,text_on=False)
-            AxionPhoton.TASEH(ax,text_on=False)
-            AxionPhoton.CASTCAPP(ax,text_on=False)
-            AxionPhoton.CAPP(ax,fs=fs-4,text_on=False,col='darkred')
-            AxionPhoton.RBF_UF(ax,fs=fs-2,text_on=False,col='darkred')
-            AxionPhoton.ADMX(ax,text_on=False,col='darkred')
-            AxionPhoton.CAPP(ax,text_on=False,col='darkred')
-            AxionPhoton.ORGAN(ax,text_on=False,col='darkred',lw=0)
-            AxionPhoton.HAYSTAC(ax,text_on=False,col='darkred')
-            AxionPhoton.RBF_UF(ax,text_on=False,col='darkred')
-            AxionPhoton.QUAX(ax,text_on=False,col='darkred')
+            AxionPhoton.ADMX(ax,fs=fs,text_on=False,col='green')
+            AxionPhoton.HAYSTAC(ax,text_on=False,col='green')
+            AxionPhoton.ABRACADABRA(ax,fs=fs,text_on=False,col='green')
+            AxionPhoton.SHAFT(ax,text_on=text_on,col='green')
+            AxionPhoton.ADBC1(ax,text_on=text_on,col='green')
+            AxionPhoton.ORGAN(ax,text_on=False,lw=0,col='green')
+            AxionPhoton.UPLOAD(ax,text_on=False,col='green')
+            AxionPhoton.TASEH(ax,text_on=False,col='green')
+            AxionPhoton.CASTCAPP(ax,text_on=False,col='green')
+            AxionPhoton.CAPP(ax,fs=fs-4,text_on=False,col='green')
+            AxionPhoton.RBF_UF(ax,fs=fs-2,text_on=False,col='green')
+            AxionPhoton.ADMX(ax,text_on=False,col='green')
+            AxionPhoton.CAPP(ax,text_on=False,col='green')
+            AxionPhoton.ORGAN(ax,text_on=False,col='green',lw=0)
+            AxionPhoton.HAYSTAC(ax,text_on=False,col='green')
+            AxionPhoton.RBF_UF(ax,text_on=False,col='green')
+            AxionPhoton.QUAX(ax,text_on=False,col='green')
             plt.text(0.5e-5,0.45e-12,r'{\bf Haloscopes}',color='w',rotation=90,fontsize=15)
 
             col = Projection_color
@@ -1811,10 +1812,10 @@ class AxionPhoton():
         return
 
     def LSW(ax,projection=False,text_on=True):
-        AxionPhoton.ALPS(ax,projection=projection,text_on=text_on)
-        AxionPhoton.PVLAS(ax,text_on=text_on)
-        AxionPhoton.OSQAR(ax,text_on=text_on)
-        AxionPhoton.CROWS(ax,text_on=text_on)
+        AxionPhoton.ALPS(ax,projection=projection,text_on=text_on, col=[0.5, 0.5, 0.5], block=False, lsty_proj='--')
+        AxionPhoton.PVLAS(ax,text_on=text_on, col=[0.5, 0.5, 0.5])
+        AxionPhoton.OSQAR(ax,text_on=text_on, col=[0.5, 0.5, 0.5])
+        AxionPhoton.CROWS(ax,text_on=text_on, col=[0.5, 0.5, 0.5])
         if projection:
             AxionPhoton.WISPFI(ax,text_on=text_on)
         return
@@ -1834,16 +1835,16 @@ class AxionPhoton():
         return
 
     def LowMassAstroBounds(ax,projection=False,text_on=True,edgealpha=1,lw=0.75,GalacticSN=False):
-        AxionPhoton.FermiSNe(ax,text_on=text_on,edgealpha=edgealpha,lw=lw)
-        AxionPhoton.DSNALP(ax,text_on=text_on,edgealpha=edgealpha,lw=lw)
-        AxionPhoton.Hydra(ax,text_on=text_on,edgealpha=edgealpha,lw=lw)
-        AxionPhoton.M87(ax,text_on=text_on,edgealpha=edgealpha,lw=lw)
-        AxionPhoton.Mrk421(ax,text_on=text_on,edgealpha=edgealpha,lw=lw)
-        AxionPhoton.Fermi(ax,text_on=text_on,edgealpha=edgealpha,lw=lw)
-        AxionPhoton.StarClusters(ax,text_on=text_on,edgealpha=edgealpha,lw=lw)
-        AxionPhoton.FermiQuasars(ax,text_on=text_on,edgealpha=edgealpha,lw=lw)
-        AxionPhoton.MAGIC(ax,text_on=text_on,edgealpha=edgealpha,lw=lw)
-        AxionPhoton.M82(ax,text_on=text_on,edgealpha=edgealpha,lw=lw)
+        AxionPhoton.FermiSNe(ax,text_on=text_on,edgealpha=edgealpha,lw=lw, col=[0.6, 1.0, 0.8])
+        AxionPhoton.DSNALP(ax,text_on=text_on,edgealpha=edgealpha,lw=lw, col=[0.6, 1.0, 0.8])
+        AxionPhoton.Hydra(ax,text_on=text_on,edgealpha=edgealpha,lw=lw, col=[0.6, 1.0, 0.8])
+        AxionPhoton.M87(ax,text_on=text_on,edgealpha=edgealpha,lw=lw, col=[0.6, 1.0, 0.8])
+        AxionPhoton.Mrk421(ax,text_on=text_on,edgealpha=edgealpha,lw=lw, col=[0.6, 1.0, 0.8])
+        AxionPhoton.Fermi(ax,text_on=text_on,edgealpha=edgealpha,lw=lw, col=[0.6, 1.0, 0.8])
+        AxionPhoton.StarClusters(ax,text_on=text_on,edgealpha=edgealpha,lw=lw, col=[0.6, 1.0, 0.8])
+        AxionPhoton.FermiQuasars(ax,text_on=text_on,edgealpha=edgealpha,lw=lw, col=[0.6, 1.0, 0.8])
+        AxionPhoton.MAGIC(ax,text_on=text_on,edgealpha=edgealpha,lw=lw, col=[0.6, 1.0, 0.8])
+        AxionPhoton.M82(ax,text_on=text_on,edgealpha=edgealpha,lw=lw, col=[0.6, 1.0, 0.8])
         if projection:
             AxionPhoton.NGC1275(ax,text_on=text_on,edgealpha=edgealpha,lw=lw)
             AxionPhoton.H1821643(ax,text_on=False,edgealpha=edgealpha,lw=lw)
@@ -1856,38 +1857,38 @@ class AxionPhoton():
             AxionPhoton.HESS(ax,text_on=False,edgealpha=edgealpha,lw=lw)
             AxionPhoton.HAWC(ax,text_on=False,edgealpha=edgealpha,lw=lw)
         else:
-            AxionPhoton.NGC1275(ax,text_on=text_on,edgealpha=edgealpha,lw=lw)
-            AxionPhoton.H1821643(ax,text_on=False,edgealpha=edgealpha,lw=lw)
-            AxionPhoton.SN1987A_gamma(ax,text_on=False,edgealpha=edgealpha,lw=lw)
-            AxionPhoton.HESS(ax,edgealpha=edgealpha,lw=lw,text_on=False)
-            AxionPhoton.HAWC(ax,edgealpha=edgealpha,lw=lw,text_on=False)
-            AxionPhoton.MWDXrays(ax,text_on=text_on,edgealpha=edgealpha,lw=lw)
-            AxionPhoton.MWDPolarisation(ax,text_on=text_on,edgealpha=edgealpha,lw=lw)
-            AxionPhoton.PulsarPolarCap(ax,text_on=text_on,edgealpha=edgealpha,lw=lw)
+            AxionPhoton.NGC1275(ax,text_on=text_on,edgealpha=edgealpha,lw=lw, col=[0.6, 1.0, 0.8])
+            AxionPhoton.H1821643(ax,text_on=False,edgealpha=edgealpha,lw=lw, col=[0.6, 1.0, 0.8])
+            AxionPhoton.SN1987A_gamma(ax,text_on=False,edgealpha=edgealpha,lw=lw, col=[0.6, 1.0, 0.8])
+            AxionPhoton.HESS(ax,edgealpha=edgealpha,lw=lw,text_on=False, col=[0.6, 1.0, 0.8])
+            AxionPhoton.HAWC(ax,edgealpha=edgealpha,lw=lw,text_on=False, col=[0.6, 1.0, 0.8])
+            AxionPhoton.MWDXrays(ax,text_on=text_on,edgealpha=edgealpha,lw=lw, col=[0.6, 1.0, 0.8])
+            AxionPhoton.MWDPolarisation(ax,text_on=text_on,edgealpha=edgealpha,lw=lw, col=[0.6, 1.0, 0.8])
+            AxionPhoton.PulsarPolarCap(ax,text_on=text_on,edgealpha=edgealpha,lw=lw, col=[0.6, 1.0, 0.8])
         return
 
     def StellarBounds(ax,text_on=True):
-        AxionPhoton.GlobularClusters(ax,text_on=text_on)
-        AxionPhoton.SolarNu(ax,text_on=text_on)
-        AxionPhoton.WhiteDwarfs(ax,text_on=text_on)
+        AxionPhoton.GlobularClusters(ax,text_on=text_on, col=[0.0, 0.66, 0.42])
+        AxionPhoton.SolarNu(ax,text_on=text_on, col=[0.0, 0.66, 0.42])
+        AxionPhoton.WhiteDwarfs(ax,text_on=text_on, col=[0.0, 0.66, 0.42])
         return
 
     def ALPdecay(ax,projection=False,text_on=True):
-        AxionPhoton.DiffuseGammaRays(ax,text_on=text_on)
-        AxionPhoton.SN1987A_decay(ax,text_on=text_on)
-        AxionPhoton.SN1987A_HeavyALP_nu(ax,text_on=text_on)
-        AxionPhoton.MUSE(ax,text_on=text_on)
-        AxionPhoton.JWST(ax,text_on=text_on)
-        AxionPhoton.VIMOS(ax,text_on=text_on)
-        AxionPhoton.HST(ax,text_on=text_on)
-        AxionPhoton.GammaRayAttenuation(ax,text_on=text_on)
-        AxionPhoton.XMMNewton(ax,text_on=text_on)
-        AxionPhoton.INTEGRAL(ax,text_on=text_on)
-        AxionPhoton.NuSTAR(ax,text_on=text_on)
-        AxionPhoton.LeoT(ax,text_on=text_on)
+        AxionPhoton.DiffuseGammaRays(ax,text_on=text_on,col='#2b2259',text_col='#2b2259')
+        AxionPhoton.SN1987A_decay(ax,text_on=text_on,col='#2b2259',text_col='#2b2259')
+        AxionPhoton.SN1987A_HeavyALP_nu(ax,text_on=text_on,col='#2b2259',text_col='#2b2259')
+        AxionPhoton.MUSE(ax,text_on=text_on,col='#2b2259',text_col='#2b2259')
+        AxionPhoton.JWST(ax,text_on=text_on,col='#2b2259',text_col='#2b2259')
+        AxionPhoton.VIMOS(ax,text_on=text_on,col='#2b2259',text_col='#2b2259')
+        AxionPhoton.HST(ax,text_on=text_on,col='#2b2259',text_col='#2b2259')
+        AxionPhoton.GammaRayAttenuation(ax,text_on=text_on,col='#2b2259',text_col='#2b2259')
+        AxionPhoton.XMMNewton(ax,text_on=text_on,col='#2b2259',text_col='#2b2259')
+        AxionPhoton.INTEGRAL(ax,text_on=text_on,col='#2b2259',text_col='#2b2259')
+        AxionPhoton.NuSTAR(ax,text_on=text_on,col='#2b2259',text_col='#2b2259')
+        AxionPhoton.LeoT(ax,text_on=text_on,col='#2b2259',text_col='#2b2259')
         if projection:
-            AxionPhoton.THESEUS(ax,text_on=text_on)
-            AxionPhoton.WINERED(ax,text_on=False)
+            AxionPhoton.THESEUS(ax,text_on=text_on,col='#2b2259',text_col='#2b2259')
+            AxionPhoton.WINERED(ax,text_on=False,col='#2b2259',text_col='#2b2259')
             
             # 21 cm
             PlotBound(ax,"limit_data/AxionPhoton/Projections/21cm.txt",edgecolor='deepskyblue',zorder=0.0,alpha=0.0,lw=1.5,linestyle=(6, (4, 1.5,4,1)),edgealpha=0.85)
